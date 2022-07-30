@@ -728,7 +728,7 @@ $ <span class="nb">cd</span> matchbox
 </code></pre></div>
 <p>Download Fedora CoreOS or Flatcar Linux image assets to <code>examples/assets</code>.</p>
 <div class="highlight"><pre><span></span><code>$ ./scripts/get-fedora-coreos stable <span class="m">36</span>.20220618.3.1 ./examples/assets
-$ ./scripts/get-flatcar stable <span class="m">2605</span>.6.0 ./examples/assets
+$ ./scripts/get-flatcar stable <span class="m">3227</span>.2.0 ./examples/assets
 </code></pre></div>
 <p>For development convenience, add <code>/etc/hosts</code> entries for nodes so they may be referenced by name.</p>
 <div class="highlight"><pre><span></span><code><span class="c1"># /etc/hosts</span>
@@ -760,9 +760,11 @@ $ sudo docker run --name dnsmasq --cap-add<span class="o">=</span>NET_ADMIN -v <
 <p>Create QEMU/KVM VMs which have known hardware attributes. The nodes will be attached to the <code>docker0</code> bridge, where Docker containers run.</p>
 <div class="highlight"><pre><span></span><code>$ sudo ./scripts/libvirt create
 </code></pre></div>
-<p>You can connect to the serial console of any node (ctrl+] to exit). If you provisioned nodes with an SSH key, you can SSH after bring-up.</p>
+<p>If you provisioned nodes with an SSH key, you can SSH after bring-up.</p>
+<div class="highlight"><pre><span></span><code>$ ssh core@node1.example.com
+</code></pre></div>
+<p>If you set a <code>console=ttyS0</code> kernel arg, you can connect to the serial console of any node (ctrl+] to exit).</p>
 <div class="highlight"><pre><span></span><code>$ sudo virsh console node1
-$ ssh core@node1.example.com
 </code></pre></div>
 <p>You can also use <code>virt-manager</code> to watch the console.</p>
 <div class="highlight"><pre><span></span><code>$ sudo virt-manager

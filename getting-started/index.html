@@ -785,7 +785,7 @@ matchbox
 <h2 id="terraform">Terraform<a class="headerlink" href="#terraform" title="Permanent link">&para;</a></h2>
 <p>Install <a href="https://www.terraform.io/downloads.html">Terraform</a> v0.13+ on your system.</p>
 <div class="highlight"><pre><span></span><code>$ terraform version
-Terraform v0.13.3
+Terraform v1.1.8
 </code></pre></div>
 <h3 id="examples">Examples<a class="headerlink" href="#examples" title="Permanent link">&para;</a></h3>
 <p>Clone the matchbox source.</p>
@@ -819,11 +819,11 @@ $ <span class="nb">cd</span> matchbox/examples/terraform
 <span class="w">  </span><span class="nb">required_providers</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
 <span class="w">    </span><span class="nb">ct</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
 <span class="w">      </span><span class="na">source</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;poseidon/ct&quot;</span><span class="w"></span>
-<span class="w">      </span><span class="na">version</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;0.7.1&quot;</span><span class="w"></span>
+<span class="w">      </span><span class="na">version</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;0.10.0&quot;</span><span class="w"></span>
 <span class="w">    </span><span class="p">}</span><span class="w"></span>
 <span class="w">    </span><span class="nb">matchbox</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
 <span class="w">      </span><span class="na">source</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;poseidon/matchbox&quot;</span><span class="w"></span>
-<span class="w">      </span><span class="na">version</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;0.4.1&quot;</span><span class="w"></span>
+<span class="w">      </span><span class="na">version</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;0.5.0&quot;</span><span class="w"></span>
 <span class="w">    </span><span class="p">}</span><span class="w"></span>
 <span class="w">  </span><span class="p">}</span><span class="w"></span>
 <span class="p">}</span><span class="w"></span>
@@ -834,31 +834,26 @@ $ <span class="nb">cd</span> matchbox/examples/terraform
 <span class="kr">resource</span><span class="w"> </span><span class="nc">&quot;matchbox_profile&quot;</span><span class="w"> </span><span class="nv">&quot;fedora-coreos-install&quot;</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
 <span class="w">  </span><span class="na">name</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;worker&quot;</span><span class="w"></span>
 <span class="w">  </span><span class="na">kernel</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;https://builds.coreos.fedoraproject.org/prod/streams/${var.os_stream}/builds/${var.os_version}/x86_64/fedora-coreos-${var.os_version}-live-kernel-x86_64&quot;</span><span class="w"></span>
+
 <span class="w">  </span><span class="na">initrd</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="w"></span>
-<span class="w">    </span><span class="s2">&quot;https://builds.coreos.fedoraproject.org/prod/streams/${var.os_stream}/builds/${var.os_version}/x86_64/fedora-coreos-${var.os_version}-live-initramfs.x86_64.img&quot;</span><span class="w"></span>
+<span class="w">    </span><span class="s2">&quot;--name main https://builds.coreos.fedoraproject.org/prod/streams/${var.os_stream}/builds/${var.os_version}/x86_64/fedora-coreos-${var.os_version}-live-initramfs.x86_64.img&quot;</span><span class="w"></span>
 <span class="w">  </span><span class="p">]</span><span class="w"></span>
 
 <span class="w">  </span><span class="na">args</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="w"></span>
+<span class="w">    </span><span class="s2">&quot;initrd=main&quot;</span><span class="p">,</span><span class="w"></span>
 <span class="w">    </span><span class="s2">&quot;coreos.live.rootfs_url=https://builds.coreos.fedoraproject.org/prod/streams/${var.os_stream}/builds/${var.os_version}/x86_64/fedora-coreos-${var.os_version}-live-rootfs.x86_64.img&quot;</span><span class="p">,</span><span class="w"></span>
 <span class="w">    </span><span class="s2">&quot;coreos.inst.install_dev=/dev/sda&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="s2">&quot;coreos.inst.ignition_url=${var.matchbox_http_endpoint}/ignition?uuid=$${uuid}&amp;mac=$${mac:hexhyp}&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="s2">&quot;console=tty0&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="s2">&quot;console=ttyS0&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="s2">&quot;coreos.inst.ignition_url=${var.matchbox_http_endpoint}/ignition?uuid=$${uuid}&amp;mac=$${mac:hexhyp}&quot;</span><span class="w"></span>
 <span class="w">  </span><span class="p">]</span><span class="w"></span>
 
-<span class="w">  </span><span class="na">raw_ignition</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">data.ct_config.worker-ignition.rendered</span><span class="w"></span>
+<span class="w">  </span><span class="na">raw_ignition</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">data.ct_config.worker.rendered</span><span class="w"></span>
 <span class="p">}</span><span class="w"></span>
 
-<span class="kr">data</span><span class="w"> </span><span class="nc">&quot;ct_config&quot;</span><span class="w"> </span><span class="nv">&quot;worker-ignition&quot;</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">  </span><span class="na">content</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="nv">data.template_file.worker-config.rendered</span><span class="w"></span>
-<span class="w">  </span><span class="na">strict</span><span class="w">   </span><span class="o">=</span><span class="w"> </span><span class="no">true</span><span class="w"></span>
-<span class="p">}</span><span class="w"></span>
-
-<span class="kr">data</span><span class="w"> </span><span class="nc">&quot;template_file&quot;</span><span class="w"> </span><span class="nv">&quot;worker-config&quot;</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">  </span><span class="na">template</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">file</span><span class="p">(</span><span class="s2">&quot;fcc/fedora-coreos.yaml&quot;</span><span class="p">)</span><span class="w"></span>
-<span class="w">  </span><span class="nb">vars</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="na">ssh_authorized_key</span><span class="w">     </span><span class="o">=</span><span class="w"> </span><span class="nv">var.ssh_authorized_key</span><span class="w"></span>
-<span class="w">  </span><span class="p">}</span><span class="w"></span>
+<span class="kr">data</span><span class="w"> </span><span class="nc">&quot;ct_config&quot;</span><span class="w"> </span><span class="nv">&quot;worker&quot;</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="na">content</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">templatefile</span><span class="p">(</span><span class="s2">&quot;fcc/fedora-coreos.yaml&quot;</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="na">ssh_authorized_key</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">var.ssh_authorized_key</span><span class="w"></span>
+<span class="w">  </span><span class="p">})</span><span class="w"></span>
+<span class="w">  </span><span class="na">strict</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="no">true</span><span class="w"></span>
 <span class="p">}</span><span class="w"></span>
 </code></pre></div>
 <h3 id="groups">Groups<a class="headerlink" href="#groups" title="Permanent link">&para;</a></h3>
@@ -874,8 +869,9 @@ $ <span class="nb">cd</span> matchbox/examples/terraform
 <div class="highlight"><pre><span></span><code>cp terraform.tfvars.example terraform.tfvars
 </code></pre></div>
 <div class="highlight"><pre><span></span><code><span class="na">matchbox_http_endpoint</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;http://matchbox.example.com:8080&quot;</span><span class="w"></span>
-<span class="na">matchbox_rpc_endpoint</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;matchbox.example.com:8081&quot;</span><span class="w"></span>
-<span class="na">ssh_authorized_key</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;YOUR_SSH_KEY&quot;</span><span class="w"></span>
+<span class="na">matchbox_rpc_endpoint</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;matchbox.example.com:8081&quot;</span><span class="w"></span>
+<span class="na">os_version</span><span class="w">             </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;36.20220618.3.1&quot;</span><span class="w"></span>
+<span class="na">ssh_authorized_key</span><span class="w">     </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;YOUR_SSH_KEY&quot;</span><span class="w"></span>
 </code></pre></div>
 <h3 id="apply">Apply<a class="headerlink" href="#apply" title="Permanent link">&para;</a></h3>
 <p>Initialize the Terraform workspace. Then plan and apply the resources.</p>

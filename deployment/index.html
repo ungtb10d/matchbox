@@ -962,7 +962,7 @@ $ dig matchbox.example.com
 matchbox
 </code></pre></div>
 <p>If you enabled the gRPC API,</p>
-<div class="highlight"><pre><span></span><code>$ openssl s_client -connect matchbox.example.com:8081 -CAfile /etc/matchbox/ca.crt -cert scripts/tls/client.crt -key scripts/tls/client.key
+<div class="highlight"><pre><span></span><code>$ openssl s_client -connect matchbox.example.com:8081 -CAfile scripts/tls/ca.crt -cert scripts/tls/client.crt -key scripts/tls/client.key
 CONNECTED<span class="o">(</span><span class="m">00000003</span><span class="o">)</span>
 <span class="nv">depth</span><span class="o">=</span><span class="m">1</span> <span class="nv">CN</span> <span class="o">=</span> fake-ca
 verify <span class="k">return</span>:1
@@ -979,7 +979,7 @@ Certificate chain
 <p>Matchbox can serve OS images in development or lab environments to reduce bandwidth usage and increase the speed of PXE boots and installs to disk.</p>
 <p>Download a recent Fedora CoreOS or Flatcar Linux release.</p>
 <div class="highlight"><pre><span></span><code>$ ./scripts/get-fedora-coreos stable 36.20220618.3.1 .
-$ ./scripts/get-flatcar stable 2605.6.0 .
+$ ./scripts/get-flatcar stable 3227.2.0 .
 </code></pre></div>
 <p>Move the images to <code>/var/lib/matchbox/assets</code>,</p>
 <div class="highlight"><pre><span></span><code>/var/lib/matchbox/assets/fedora-coreos/
@@ -988,7 +988,7 @@ $ ./scripts/get-flatcar stable 2605.6.0 .
 ├── fedora-coreos-36.20220618.3.1-live-rootfs.x86_64.img
 
 /var/lib/matchbox/assets/flatcar/
-└── 2605.6.0
+└── 3227.2.0
     ├── Flatcar_Image_Signing_Key.asc
     ├── flatcar_production_image.bin.bz2
     ├── flatcar_production_image.bin.bz2.sig
