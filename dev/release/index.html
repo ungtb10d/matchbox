@@ -613,7 +613,7 @@
 <p>This guide covers releasing new versions of matchbox.</p>
 <h2 id="version">Version<a class="headerlink" href="#version" title="Permanent link">&para;</a></h2>
 <p>Create a release commit which updates old version references.</p>
-<div class="highlight"><pre><span></span><code>$ <span class="nb">export</span> <span class="nv">VERSION</span><span class="o">=</span>v0.9.0
+<div class="highlight"><pre><span></span><code>$ <span class="nb">export</span> <span class="nv">VERSION</span><span class="o">=</span>v0.9.1
 </code></pre></div>
 <h2 id="tag">Tag<a class="headerlink" href="#tag" title="Permanent link">&para;</a></h2>
 <p>Tag, sign the release version, and push it to Github.</p>
@@ -632,7 +632,7 @@ $ git push origin master
 <div class="highlight"><pre><span></span><code>$ make release
 </code></pre></div>
 <p>Verify the reported version.</p>
-<div class="highlight"><pre><span></span><code>./_output/matchbox-v0.9.0-linux-amd64/matchbox -version
+<div class="highlight"><pre><span></span><code>./_output/matchbox-v0.9.1-linux-amd64/matchbox -version
 </code></pre></div>
 <h2 id="signing">Signing<a class="headerlink" href="#signing" title="Permanent link">&para;</a></h2>
 <p>Release tarballs are signed by Dalton Hubble's GPG <a href="/docs/deployment.md#download">Key</a></p>

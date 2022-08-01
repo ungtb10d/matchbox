@@ -842,17 +842,17 @@
 </ul>
 <h2 id="download">Download<a class="headerlink" href="#download" title="Permanent link">&para;</a></h2>
 <p>Download the latest Matchbox <a href="https://github.com/poseidon/matchbox/releases">release</a>.</p>
-<div class="highlight"><pre><span></span><code>$ wget https://github.com/poseidon/matchbox/releases/download/v0.9.0/matchbox-v0.9.0-linux-amd64.tar.gz
-$ wget https://github.com/poseidon/matchbox/releases/download/v0.9.0/matchbox-v0.9.0-linux-amd64.tar.gz.asc
+<div class="highlight"><pre><span></span><code>$ wget https://github.com/poseidon/matchbox/releases/download/v0.9.1/matchbox-v0.9.1-linux-amd64.tar.gz
+$ wget https://github.com/poseidon/matchbox/releases/download/v0.9.1/matchbox-v0.9.1-linux-amd64.tar.gz.asc
 </code></pre></div>
 <p>Verify the release has been signed by Dalton Hubble's GPG <a href="https://keyserver.ubuntu.com/pks/lookup?search=0x8F515AD1602065C8&amp;op=vindex">Key</a>'s signing subkey.</p>
 <div class="highlight"><pre><span></span><code>$ gpg --keyserver keyserver.ubuntu.com --recv-key 2E3D92BF07D9DDCCB3BAE4A48F515AD1602065C8
-$ gpg --verify matchbox-v0.9.0-linux-amd64.tar.gz.asc matchbox-v0.9.0-linux-amd64.tar.gz
+$ gpg --verify matchbox-v0.9.1-linux-amd64.tar.gz.asc matchbox-v0.9.1-linux-amd64.tar.gz
 gpg: Good signature from <span class="s2">&quot;Dalton Hubble &lt;dghubble@gmail.com&gt;&quot;</span>
 </code></pre></div>
 <p>Untar the release.</p>
-<div class="highlight"><pre><span></span><code>$ tar xzvf matchbox-v0.9.0-linux-amd64.tar.gz
-$ <span class="nb">cd</span> matchbox-v0.9.0-linux-amd64
+<div class="highlight"><pre><span></span><code>$ tar xzvf matchbox-v0.9.1-linux-amd64.tar.gz
+$ <span class="nb">cd</span> matchbox-v0.9.1-linux-amd64
 </code></pre></div>
 <h2 id="install">Install<a class="headerlink" href="#install" title="Permanent link">&para;</a></h2>
 <p>Run Matchbox as a binary, a container image, or on Kubernetes.</p>
@@ -896,11 +896,11 @@ $ sudo systemctl enable matchbox
 <h3 id="container-image">Container Image<a class="headerlink" href="#container-image" title="Permanent link">&para;</a></h3>
 <p>Run the container image with Podman,</p>
 <div class="highlight"><pre><span></span><code>mkdir -p /var/lib/matchbox/assets
-podman run --net=host --rm -v /var/lib/matchbox:/var/lib/matchbox:Z -v /etc/matchbox:/etc/matchbox:Z,ro quay.io/poseidon/matchbox:v0.9.0 -address=0.0.0.0:8080 -rpc-address=0.0.0.0:8081 -log-level=debug
+podman run --net=host --rm -v /var/lib/matchbox:/var/lib/matchbox:Z -v /etc/matchbox:/etc/matchbox:Z,ro quay.io/poseidon/matchbox:v0.9.1 -address=0.0.0.0:8080 -rpc-address=0.0.0.0:8081 -log-level=debug
 </code></pre></div>
 <p>Or with Docker,</p>
 <div class="highlight"><pre><span></span><code>mkdir -p /var/lib/matchbox/assets
-sudo docker run --net=host --rm -v /var/lib/matchbox:/var/lib/matchbox:Z -v /etc/matchbox:/etc/matchbox:Z,ro quay.io/poseidon/matchbox:v0.9.0 -address=0.0.0.0:8080 -rpc-address=0.0.0.0:8081 -log-level=debug
+sudo docker run --net=host --rm -v /var/lib/matchbox:/var/lib/matchbox:Z -v /etc/matchbox:/etc/matchbox:Z,ro quay.io/poseidon/matchbox:v0.9.1 -address=0.0.0.0:8080 -rpc-address=0.0.0.0:8081 -log-level=debug
 </code></pre></div>
 <p>Create machine profiles, groups, or Ignition configs by adding files to <code>/var/lib/matchbox</code>.</p>
 <h3 id="kubernetes">Kubernetes<a class="headerlink" href="#kubernetes" title="Permanent link">&para;</a></h3>
